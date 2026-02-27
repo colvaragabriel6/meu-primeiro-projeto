@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Informativos para Google Drive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .section h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .info-box {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .info-box strong {
+            color: #333;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .code-box {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .stat-box .label {
+            color: #999;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .stat-box .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .instructions {
+            background: #f0f7ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .instructions ol {
+            margin-left: 20px;
+            color: #333;
+        }
+        .instructions li {
+            margin: 8px 0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: none;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📤 Upload de Informativos</h1>
+        <p class="subtitle">Envie todos os informativos para o Google Drive</p>
+        
+        <div class="section">
+            <h2>📊 Informações sobre os arquivos</h2>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="label">Informativos STF</div>
+                    <div class="value">376</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">Informativos STJ</div>
+                    <div class="value">432</div>
+                </div>
+            </div>
+            <div class="stat-box" style="grid-column: 1/-1; margin-top: 15px;">
+                <div class="label">Total de PDFs</div>
+                <div class="value">808</div>
+            </div>
+            <div class="info-box" style="margin-top: 15px;">
+                <strong>📁 Estrutura no Drive:</strong><br>
+                DOD - Informativos<br>
+                ├── Informativos_STF (376 PDFs)<br>
+                └── Informativos_STJ (432 PDFs)
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Problema com OAuth</h2>
+            <div class="info-box" style="border-left-color: #ff6b6b; background: #ffe0e0;">
+                <strong>⚠️ Acesso bloqueado:</strong> A aplicação RAG Jurisprudência não está configurada corretamente no Google Cloud Console.
+            </div>
+            
+            <p style="margin-bottom: 15px; color: #666;">
+                Oferecemos 3 soluções alternativas:
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>💡 Solução 1: Upload manual via Google Drive Web</h2>
+            <div class="instructions">
+                <strong>Passos:</strong>
+                <ol>
+                    <li>Abra <a href="https://drive.google.com" target="_blank" style="color: #667eea; text-decoration: none;">drive.google.com</a></li>
+                    <li>Crie uma pasta chamada <strong>"DOD - Informativos"</strong></li>
+                    <li>Dentro dela, crie 2 subpastas: <strong>"Informativos_STF"</strong> e <strong>"Informativos_STJ"</strong></li>
+                    <li>Arraste os arquivos PDF para as respectivas pastas</li>
+                </ol>
+            </div>
+            <button onclick="window.open('https://drive.google.com', '_blank')">
+                📁 Abrir Google Drive
+            </button>
+        </div>
+
+        <div class="section">
+            <h2>💡 Solução 2: Usar rclone (Recomendado)</h2>
+            <div class="info-box">
+                <strong>rclone</strong> é uma ferramenta poderosa para sincronizar arquivos com o Google Drive.
+            </div>
+            <div class="instructions">
+                <strong>Passos:</strong>
+                <ol>
+                    <li>No seu terminal, instale rclone:
+                        <div class="code-box">curl https://rclone.org/install.sh | sudo bash</div>
+                    </li>
+                    <li>Configure acesso ao Google Drive:
+                        <div class="code-box">rclone config</div>
+                        (selecione "Google Drive" e autorize)
+                    </li>
+                    <li>Crie as pastas:
+                        <div class="code-box">rclone mkdir gdrive:"DOD - Informativos"<br>rclone mkdir gdrive:"DOD - Informativos/Informativos_STF"<br>rclone mkdir gdrive:"DOD - Informativos/Informativos_STJ"</div>
+                    </li>
+                    <li>Faça upload:
+                        <div class="code-box">rclone copy downloads/Informativos_STF/ gdrive:"DOD - Informativos/Informativos_STF" -v<br>rclone copy downloads/Informativos_STJ/ gdrive:"DOD - Informativos/Informativos_STJ" -v</div>
+                    </li>
+                </ol>
+            </div>
+            <button onclick="copyCode('rclone')">📋 Copiar comandos</button>
+        </div>
+
+        <div class="section">
+            <h2>💡 Solução 3: Reconfigurar OAuth (Avançado)</h2>
+            <div class="instructions">
+                <strong>Se quiser resolver o problema no code:</strong>
+                <ol>
+                    <li>Acesse <a href="https://console.cloud.google.com" target="_blank" style="color: #667eea;">Google Cloud Console</a></li>
+                    <li>Encontre o projeto "RAG Jurisprudência"</li>
+                    <li>Vá para "APIs & Services" > "OAuth consent screen"</li>
+                    <li>Verifique se está em "Teste" e adicione seu e-mail como testador</li>
+                    <li>Remova o arquivo <code>secrets/drive_token.json</code> e execute novamente o script Python</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="success" id="successMsg">
+            ✅ <strong>Sucesso!</strong> Os comandos foram copiados para a área de transferência.
+        </div>
+        <div class="error" id="errorMsg">
+            ❌ <strong>Erro!</strong> Não foi possível copiar os comandos.
+        </div>
+    </div>
+
+    <script>
+        function copyCode(type) {
+            let text = '';
+            
+            if (type === 'rclone') {
+                text = `# 1. Instalar rclone
+curl https://rclone.org/install.sh | sudo bash
+
+# 2. Configurar Google Drive
+rclone config
+
+# 3. Criar pastas
+rclone mkdir gdrive:"DOD - Informativos"
+rclone mkdir gdrive:"DOD - Informativos/Informativos_STF"
+rclone mkdir gdrive:"DOD - Informativos/Informativos_STJ"
+
+# 4. Fazer upload STF
+rclone copy downloads/Informativos_STF/ gdrive:"DOD - Informativos/Informativos_STF" -v --transfers 4
+
+# 5. Fazer upload STJ
+rclone copy downloads/Informativos_STJ/ gdrive:"DOD - Informativos/Informativos_STJ" -v --transfers 4`;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showMessage('success');
+            }).catch(() => {
+                showMessage('error');
+            });
+        }
+        
+        function showMessage(type) {
+            const elem = document.getElementById(type + 'Msg');
+            elem.style.display = 'block';
+            setTimeout(() => {
+                elem.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
